@@ -1,0 +1,60 @@
+export const NBLTeamMap = (item) => {
+  if (!item) {
+    return false;
+  }
+  const { MasterEventName } = item;
+
+  // List of individual teams
+  const teams = [
+    'Sydney Kings',
+    'S.E. Melbourne Phoenix', 
+    'Tasmania JackJumpers',
+    'New Zealand Breakers',
+    'Melbourne United',
+    'Perth Wildcats',
+    'Adelaide 36ers',
+    'Illawarra Hawks',
+    'Brisbane Bullets',
+    'Cairns Taipans',
+    'Toronto',
+  ];
+
+  // Check if masterEventName contains any of the team names
+  return teams.some((team) => MasterEventName.includes(team));
+};
+
+export const NBLNameExpanded = (shortName) => {
+  // Map of short names to full team names
+  const teamNameMap = {
+    'KINGS': 'Sydney Kings',
+    'PHOENIX': 'S.E. Melbourne Phoenix',
+    'JACKJUMPERS': 'Tasmania JackJumpers',
+    'BREAKERS': 'New Zealand Breakers',
+    'UNITED': 'Melbourne United',
+    'WILDCATS': 'Perth Wildcats',
+    '36ERS': 'Adelaide 36ers',
+    'HAWKS': 'Illawarra Hawks',
+    'BULLETS': 'Brisbane Bullets',
+    'TAIPANS': 'Cairns Taipans'
+  };
+
+  // Return the full team name or undefined if not found
+  return teamNameMap[shortName];
+};
+
+{group.matches.map((match, matchIndex) => (
+    <div className={classes.swStatvStatIndividualContainer}>
+      <Typography className={classes.swStatvStatPlayerMatchupTitle}>
+        {match.player1.name} vs {match.player2.name}
+      </Typography>
+      <div className={classes.betContainer}>
+        <BetButtonFixedOdds
+          key={match.player1.name}
+          label={match.player1.name}
+          price={match.player1.odds}
+          handleClick={(e) => handleClick(e, match.player1.event)}
+          className={`${checkIsSelected(match.player1.event) && 'bet-selected'} ${
+            classes.betButton
+          }`}
+        />
+        <BetButt
